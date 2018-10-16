@@ -58,17 +58,18 @@ create_monitor_set("mrf_waveforms.req", 30 , "")
 
 
 ############### Configure RF input ##########
-#dbpf $(IOC)-$(DEV1):EvtClk-Source-Sel "RF"
-#dbpf $(IOC)-$(DEV1):EvtClk-RFFreq-SP 88.0525
-#dbpf $(IOC)-$(DEV1):EvtClk-RFDiv-SP 1
+dbpf $(IOC)-$(DEV1):EvtClk-Source-Sel "RF"
+dbpf $(IOC)-$(DEV1):EvtClk-RFFreq-SP 88.0525
+dbpf $(IOC)-$(DEV1):EvtClk-RFDiv-SP 1
 ############### Configure RF input ##########
 
-dbpf "$(IOC)-$(DEV1):1ppsInp-Sel" "Sys Clk"
+#External PPS connected 20181009
+#dbpf "$(IOC)-$(DEV1):1ppsInp-Sel" "Sys Clk"
 ############## Configure front panel for evr 125 1 Hz ##############
-#dbpf $(IOC)-$(DEV1):TrigEvt1-EvtCode-SP 125
-#dbpf $(IOC)-$(DEV1):TrigEvt1-TrigSrc-Sel "Univ0"
-#dbpf $(IOC)-$(DEV1):1ppsInp-Sel "Univ0"
-#dbpf $(IOC)-$(DEV1):1ppsInp-MbbiDir_.TPRO 1
+dbpf $(IOC)-$(DEV1):TrigEvt1-EvtCode-SP 125
+dbpf $(IOC)-$(DEV1):TrigEvt1-TrigSrc-Sel "Univ0"
+dbpf $(IOC)-$(DEV1):1ppsInp-Sel "Univ0"
+dbpf $(IOC)-$(DEV1):1ppsInp-MbbiDir_.TPRO 1
 ############## Configure front panel for evr 125 1 Hz ##############
 
 ############## Master Event Rate 14 Hz ##############
