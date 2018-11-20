@@ -1,7 +1,7 @@
 # This the full setup for the Timing System with E3.
 #
 
-require mrfioc2, 2.2.0-rc2
+require mrfioc2, 2.2.0-rc4
 require iocStats, ae5d083
 require autosave, 5.9.0
 
