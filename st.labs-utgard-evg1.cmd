@@ -15,7 +15,8 @@ epicsEnvSet("MainEvtCODE" "14")
 epicsEnvSet("HeartBeatEvtCODE"   "122")
 epicsEnvSet("ESSEvtClockRate"  "88.0525")
 
-mrmEvgSetupPCI($(DEV1), "6:0d.0")
+#mrmEvgSetupPCI($(DEV1), "6:0d.0")
+mrmEvgSetupPCI($(DEV1), "5:0d.0")
 dbLoadRecords("evg-cpci-230-ess.db",  "SYS=$(IOC), D=$(DEV1), EVG=$(DEV1), FEVT=$(ESSEvtClockRate), FRF=$(ESSEvtClockRate), FDIV=1, PINITSEQ=0")
 
 # iocStats
