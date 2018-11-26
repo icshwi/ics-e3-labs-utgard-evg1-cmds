@@ -59,7 +59,7 @@ create_monitor_set("mrf_waveforms.req", 30 , "")
 
 
 ############### Configure RF input ##########
-dbpf $(IOC)-$(DEV1):EvtClk-Source-Sel "RF"
+dbpf $(IOC)-$(DEV1):EvtClk-Source-Sel "RF (Ext)"
 dbpf $(IOC)-$(DEV1):EvtClk-RFFreq-SP 88.0525
 dbpf $(IOC)-$(DEV1):EvtClk-RFDiv-SP 1
 ############### Configure RF input ##########
@@ -81,10 +81,12 @@ dbpf $(IOC)-$(DEV1):Mxc0-Prescaler-SP 6289464
 dbpf $(IOC)-$(DEV1):SoftSeq0-RunMode-Sel "Normal"
 dbpf $(IOC)-$(DEV1):SoftSeq0-TrigSrc-Sel "Mxc0"
 dbpf $(IOC)-$(DEV1):SoftSeq0-TsResolution-Sel "uSec"
+epicsThreadSleep 5
 dbpf $(IOC)-$(DEV1):SoftSeq0-Load-Cmd 1
 dbpf $(IOC)-$(DEV1):SoftSeq0-Enable-Cmd 1
 # Load the sequence
 system("/bin/sh ./configure_sequencer_14Hz.sh $(IOC) $(DEV1)")
+dbpf $(IOC)-$(DEV1):SoftSeq0-Commit-Cmd 1
 ############## Master Event Rate 14 Hz ##############
 
 # # Heart Beat 1 Hz
@@ -92,7 +94,4 @@ dbpf $(IOC)-$(DEV1):Mxc7-Prescaler-SP 88052500
 dbpf $(IOC)-$(DEV1):TrigEvt7-EvtCode-SP $(HeartBeatEvtCODE)
 dbpf $(IOC)-$(DEV1):TrigEvt7-TrigSrc-Sel "Mxc7"
 
-epicsThreadSleep 5
 dbpf $(IOC)-$(DEV1):SyncTimestamp-Cmd 1
-
-
