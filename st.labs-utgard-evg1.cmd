@@ -1,9 +1,10 @@
 # This the full setup for the Timing System with E3.
 #
 
-require mrfioc2, 2.2.0-rc2
+require mrfioc2, 2.2.0-rc5
 require iocStats, ae5d083
 require autosave, 5.9.0
+require recsync,1.3.0
 
 epicsEnvSet("ENGINEER","Nicklas Holmberg")
 epicsEnvSet("LOCATION","Utgard")
@@ -15,7 +16,7 @@ epicsEnvSet("MainEvtCODE" "14")
 epicsEnvSet("HeartBeatEvtCODE"   "122")
 epicsEnvSet("ESSEvtClockRate"  "88.0525")
 
-mrmEvgSetupPCI($(DEV1), "6:0d.0")
+mrmEvgSetupPCI($(DEV1), "4:0d.0")
 dbLoadRecords("evg-cpci-230-ess.db",  "SYS=$(IOC), D=$(DEV1), EVG=$(DEV1), FEVT=$(ESSEvtClockRate), FRF=$(ESSEvtClockRate), FDIV=1, PINITSEQ=0")
 
 # iocStats
