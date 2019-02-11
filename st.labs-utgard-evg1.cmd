@@ -59,13 +59,11 @@ create_monitor_set("mrf_waveforms.req", 30 , "")
 
 
 ############### Configure RF input ##########
-dbpf $(IOC)-$(DEV1):EvtClk-Source-Sel "RF"
+dbpf $(IOC)-$(DEV1):EvtClk-Source-Sel "RF (Ext)"
 dbpf $(IOC)-$(DEV1):EvtClk-RFFreq-SP 88.0525
 dbpf $(IOC)-$(DEV1):EvtClk-RFDiv-SP 1
 ############### Configure RF input ##########
 
-#External PPS connected 20181009
-#dbpf "$(IOC)-$(DEV1):1ppsInp-Sel" "Sys Clk"
 ############## Configure front panel for evr 125 1 Hz ##############
 dbpf $(IOC)-$(DEV1):TrigEvt1-EvtCode-SP 125
 dbpf $(IOC)-$(DEV1):TrigEvt1-TrigSrc-Sel "Univ0"
@@ -73,18 +71,20 @@ dbpf $(IOC)-$(DEV1):1ppsInp-Sel "Univ0"
 dbpf $(IOC)-$(DEV1):1ppsInp-MbbiDir_.TPRO 1
 ############## Configure front panel for evr 125 1 Hz ##############
 
-############## Master Event Rate 14 Hz ##############
+############## Sequencer Master Event Rate 14 Hz ##############
 dbpf $(IOC)-$(DEV1):Mxc0-Prescaler-SP 6289464
-#dbpf $(IOC)-$(DEV1):TrigEvt0-EvtCode-SP $(MainEvtCODE)
-#dbpf $(IOC)-$(DEV1):TrigEvt0-TrigSrc-Sel "Mxc0"
+
 # Setup of sequencer
 dbpf $(IOC)-$(DEV1):SoftSeq0-RunMode-Sel "Normal"
 dbpf $(IOC)-$(DEV1):SoftSeq0-TrigSrc-Sel "Mxc0"
-dbpf $(IOC)-$(DEV1):SoftSeq0-TsResolution-Sel "uSec"
+dbpf $(IOC)-$(DEV1):SoftSeq0-TsResolution-Sel "Ticks"
 dbpf $(IOC)-$(DEV1):SoftSeq0-Load-Cmd 1
 dbpf $(IOC)-$(DEV1):SoftSeq0-Enable-Cmd 1
+
 # Load the sequence
-system("/bin/sh ./configure_sequencer_14Hz.sh $(IOC) $(DEV1)")
+system("/bin/sh /epics/iocs/cmds/ics-e3-labs-utgard-evg1-cmds/configure_sequencer_14Hz.sh $(IOC) $(DEV1)")
+dbpf $(IOC)-$(DEV1):SoftSeq0-Commit-Cmd 1
+
 ############## Master Event Rate 14 Hz ##############
 
 # # Heart Beat 1 Hz
@@ -92,7 +92,7 @@ dbpf $(IOC)-$(DEV1):Mxc7-Prescaler-SP 88052500
 dbpf $(IOC)-$(DEV1):TrigEvt7-EvtCode-SP $(HeartBeatEvtCODE)
 dbpf $(IOC)-$(DEV1):TrigEvt7-TrigSrc-Sel "Mxc7"
 
-epicsThreadSleep 5
+epicsThreadSleep 2 
 dbpf $(IOC)-$(DEV1):SyncTimestamp-Cmd 1
 
 
